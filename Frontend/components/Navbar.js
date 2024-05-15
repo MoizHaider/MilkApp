@@ -13,7 +13,7 @@ const Navbar = () => {
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={{
-        tabBarActiveTintColor: Colors.secondaryGreen,
+        tabBarActiveTintColor: Colors.primaryGreen,
         tabBarShowLabel: true,
         tabBarLabelStyle: {
           color: Colors.darkGreen,
@@ -30,11 +30,11 @@ const Navbar = () => {
           focusedButtonStyle={{
             width: 80,
             height: 80,
-            elevation: 20,
-            borderWidth: 10,
-            marginTop: 10,
-            borderColor: "white",
+            elevation: 10,
+            borderWidth: 8,
+            borderColor: Colors.primaryGreen,
             borderRadius: "50%",
+            backgroundColor: "white",
           }}
           bottomBarContainerStyle={{
             position: "absolute",
@@ -55,8 +55,12 @@ const Navbar = () => {
         options={{
           tabBarLabel: "Home",
           headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home" size={size} color={color} />
+          tabBarIcon: ({ color, focused, size }) => (
+            <Ionicons
+              name="home"
+              size={size}
+              color={focused ? Colors.primaryGreen : "white"}
+            />
           ),
         }}
       />
@@ -66,8 +70,12 @@ const Navbar = () => {
         options={{
           tabBarLabel: "Profile",
           headerShown: true,
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person" size={size} color={color} />
+          tabBarIcon: ({ color, focused, size }) => (
+            <Ionicons
+              name="person"
+              size={size}
+              color={focused ? Colors.primaryGreen : "white"}
+            />
           ),
         }}
       />
