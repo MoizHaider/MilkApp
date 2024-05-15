@@ -5,11 +5,10 @@ import ProfileScreen from "../screens/profile/ProfileScreen";
 import { BottomFabBar } from "rn-wave-bottom-bar";
 import { Ionicons } from "@expo/vector-icons"; // Assuming you're using Expo
 import { Colors } from "../styles";
-import TabBar from "enhanced-fluid-bottom-navigation-bar";
 
 const Tab = createBottomTabNavigator();
 
-const Navbar = ({navigation, onTabPress}) => {
+const Navbar = () => {
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -24,12 +23,35 @@ const Navbar = ({navigation, onTabPress}) => {
           backgroundColor: Colors.primaryGreen,
         },
       }}
-      
+      tabBar={(props) => (
+        <BottomFabBar
+          mode={"circle"}
+          isRtl={false}
+          focusedButtonStyle={{
+            width: 80,
+            height: 80,
+            elevation: 20,
+            borderWidth: 10,
+            marginTop: 10,
+            borderColor: "white",
+            borderRadius: "50%",
+          }}
+          bottomBarContainerStyle={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            borderTopLeftRadius: "30px",
+            borderTopRightRadius: "30px",
+            height: 70,
+          }}
+          {...props}
+        />
+      )}
     >
       <Tab.Screen
         name="Home"
         component={HomeScreen}
-        tabBar={(props) => <FluidTabBar />}
         options={{
           tabBarLabel: "Home",
           headerShown: false,
@@ -50,36 +72,6 @@ const Navbar = ({navigation, onTabPress}) => {
         }}
       />
     </Tab.Navigator>
-  );
-};
-
-const FluidTabBar = () => {
-  return (
-    <TabBar
-      onPress={(tabIndex) => {
-        const route = this.props.navigation.state.routes[tabIndex];
-        this.props.onTabPress({ route });
-      }}
-      tintColor = "#ffffff"
-      selectColor = {Colors.secondaryGreen}
-      backgroundColor = {Colors.primaryGreen}
-      autoSelect = {0}
-      values={[
-        
-        {
-          title: "Home",
-          icon: "check",
-         
-          size: 32,
-        },
-        {
-          title: "Tab 1",
-          icon: "star",
-          iconSet: "MaterialIcons",
-          size: 32,
-        },
-      ]}
-    />
   );
 };
 
