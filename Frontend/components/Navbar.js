@@ -11,7 +11,7 @@ const Tab = createBottomTabNavigator();
 const Navbar = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="profile"
       screenOptions={{
         tabBarActiveTintColor: Colors.primaryGreen,
         tabBarShowLabel: true,
@@ -65,7 +65,7 @@ const Navbar = () => {
         }}
       />
       <Tab.Screen
-        name="Profile"
+        name="profile"
         component={ProfileScreen}
         options={{
           tabBarLabel: "Profile",
