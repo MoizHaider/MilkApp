@@ -54,7 +54,7 @@ router.post("/signup", async (req, res, next) => {
   console.log("running");
   const { email, phoneNumber, password } = req.body;
   
-
+  console.log("login dat ", email, password)
   // Validate request body
   if (!email || !phoneNumber || !password) {
     return res.status(400).json({ message: "All fields are required" });
@@ -103,6 +103,7 @@ router.post("/signup", async (req, res, next) => {
       },
     });
   } catch (error) {
+    console.log("login error ", error)
     next(error); // Pass errors to the error handler middleware
   }
 });

@@ -15,7 +15,7 @@ const WelcomeScreen = ({  }) => {
 
       <View style={styles.imageContainer}>
         <Image
-          source="./assets/images/welcome.png" // Adjust the path to your image
+          source={require("../../assets/images/welcome.png")} // Adjust the path to your image
           style={styles.image}
         />
       </View>
