@@ -1,6 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-
 export const isLogged = async () => {
   try {
     const email = await AsyncStorage.getItem("email");
@@ -9,9 +8,10 @@ export const isLogged = async () => {
     const userId = await AsyncStorage.getItem("userId");
 
     if (!email || !token || !phoneNo || !userId) {
-      return false;
+      return { status: false };
     }
-    return true;
+    console.log("data ", email, " ", token, " ", phoneNo, " ", userId)
+    return { status: true, email, token, userId, phoneNo };
   } catch (error) {
     console.error("Error checking user authentication status:", error);
     return false;

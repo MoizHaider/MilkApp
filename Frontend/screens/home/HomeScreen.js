@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { Colors } from "../../styles.js";
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const onPress = (title) => {
     console.log(`${title} card pressed!`);
   };
@@ -78,17 +78,17 @@ const HomeScreen = () => {
         contentContainerStyle={styles.cardContainer}
       >
         <TouchableOpacity
-          onPress={() => onPress("Create Custom Plan")}
+         
           style={styles.card}
         >
-          <Text style={styles.title}>Create Custom Plan</Text>
+          <Text className = "text-center justify-cetner">Create Custom Plan</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => onPress("My Plan")}
+          onPress={() => navigation.navigate("home2")}
           style={styles.card}
         >
-          <Text style={styles.title}>My Plan</Text>
+          <Text className = "text-center justify-cetner">My Plan</Text>
         </TouchableOpacity>
       </ScrollView>
 
