@@ -78,17 +78,17 @@ const HomeScreen = ({navigation}) => {
         contentContainerStyle={styles.cardContainer}
       >
         <TouchableOpacity
-          onPress={() => navigation.navigate("home2")}
+         
           style={styles.card}
         >
-          <Text style={styles.title}>Create Custom Plan</Text>
+          <Text className = "text-center justify-cetner">Create Custom Plan</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => onPress("My Plan")}
+          onPress={() => navigation.navigate("home2")}
           style={styles.card}
         >
-          <Text style={styles.title}>My Plan</Text>
+          <Text className = "text-center justify-cetner">My Plan</Text>
         </TouchableOpacity>
       </ScrollView>
 

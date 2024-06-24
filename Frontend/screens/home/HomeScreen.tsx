@@ -10,6 +10,7 @@ import {
   ListRenderItem,
 } from "react-native";
 import { Colors } from "../../styles";
+import { red } from "react-native-reanimated/lib/typescript/reanimated2/Colors";
 
 interface Product {
   prd: string;
@@ -80,18 +81,32 @@ class HomeScreen extends Component<HomeScreenProps, HomeScreenState> {
 
     return (
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
-        <View style={{ backgroundColor: Colors.secondaryGreen, margin: 0, padding: 0 , paddingVertical: 20}}>
+        <View
+          style={{
+            backgroundColor: Colors.secondaryGreen,
+            margin: 0,
+            padding: 0,
+            paddingVertical: 20,
+          }}
+        >
           <View style={styles.headerContainer}>
-            <Image source={require("../../assets/favicon.png")} className = "w-30 h-30 rounded-full" />
+            <Image
+              source={require("../../assets/favicon.png")}
+              className="w-10 h-10 rounded-full"
+            />
             <Text style={styles.locationText}>Lahore, Pakistan</Text>
           </View>
 
           <View key={4} style={styles.infoContainer}>
-            <Text className = "text-2xl font-bold color-darkGreen ">Get your Dairy Products</Text>
-            <Text className = "text-lg font-semibold color-darkGreen">Delivered!</Text>
+            <Text className="text-2xl font-bold color-darkGreen ">
+              Get your Dairy Products
+            </Text>
+            <Text className="text-lg font-semibold color-darkGreen">
+              Delivered!
+            </Text>
           </View>
 
-          <View className = "flex items-center mt-5 ">
+          <View className="flex items-center mt-5 ">
             <Image
               source={require("../../assets/images/HomeTopImage.jpg")}
               style={styles.image1}
@@ -104,17 +119,19 @@ class HomeScreen extends Component<HomeScreenProps, HomeScreenState> {
           contentContainerStyle={styles.cardContainer}
         >
           <TouchableOpacity
-            onPress={() => navigation.navigate("home2")}
-            style={styles.card}
+            onPress={() => navigation.navigate("Custom Plan")}
+            style={styles.cardM}
           >
-            <Text style={styles.title}>Create Custom Plan</Text>
+            <Text className="text-center text-md font-semibold">
+              Create Custom Plan
+            </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => this.onPress("My Plan")}
-            style={styles.card}
+            onPress={() => navigation.navigate("My Plan")}
+            style={styles.cardM}
           >
-            <Text style={styles.title}>My Plan</Text>
+            <Text className="text-center  text-md font-semibold">My Plan</Text>
           </TouchableOpacity>
         </ScrollView>
 
@@ -134,13 +151,13 @@ class HomeScreen extends Component<HomeScreenProps, HomeScreenState> {
             <Text style={styles.buttonText}>Milk</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.button1}
+            style={styles.button}
             onPress={() => this.handlePress("Paneer")}
           >
             <Text style={styles.buttonText}>Paneer</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.button2}
+            style={styles.button}
             onPress={() => this.handlePress("Cheese")}
           >
             <Text style={styles.buttonText}>Cheese</Text>
@@ -178,64 +195,108 @@ const PlanCard: React.FC<PlanCardProps> = ({ title, img, prods, ttlPrice }) => {
   return (
     <View style={styles.card}>
       <Image
-        source={require("../../assets/images/milkCardImage.jpg")}
+        source={require("../../assets/MilkBottle2.jpeg")}
         style={styles.image3}
       />
-      <Text>{title}</Text>
+      <Text style={{ width: "auto", textAlign: "left" }}>{title}</Text>
       <View>
-        <FlatList
-          data={prods}
-          renderItem={({ item }) => (
-            <View>
-              <Text>{item.prd}</Text>
-              <Text>{item.qty}</Text>
-            </View>
-          )}
-          keyExtractor={(_, index) => index.toString()}
-        />
+        {prods.map((prod, index) => (
+          <View key={index} style={styles.prodRow}>
+            <Text>{prod.prd}</Text>
+            <Text>{prod.qty}</Text>
+          </View>
+        ))}
       </View>
-      <View>
-        <TouchableOpacity>
-          <Text>Add</Text>
+      <View style={styles.cardFooter}>
+        <TouchableOpacity style={styles.addButton}>
+          <Text style={styles.addButtonText}>Add</Text>
         </TouchableOpacity>
-        <Text>{ttlPrice}</Text>
+        <Text style={styles.priceText}>{ttlPrice}</Text>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  cardFooter: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    marginTop: 10,
+  },
+  addButton: {
+    backgroundColor: Colors.primaryGreen,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 5,
+  },
+  addButtonText: {
+    color: "#fff",
+    fontSize: 14,
+  },
+  priceText: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  image3: {
+    height: 100,
+    width: 120,
+    marginTop: 0,
+  },
+  prodRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+  },
+  card: {
+    backgroundColor: "#fff",
+    padding: 10,
+    marginHorizontal: 10,
+    borderRadius: 10,
+    elevation: 3,
+    shadowColor: "#000",
+    shadowOpacity: 0.3,
+    shadowOffset: { width: 0, height: 1 },
+    shadowRadius: 2,
+    height: 200, // Adjusted height to accommodate text, image, and footer
+    width: 150,
+    alignItems: "flex-start",
+    justifyContent: "flex-start", // Center the content within the card
+  },
   scrollViewContent: {
     paddingVertical: 30,
     flexGrow: 1,
   },
   cardContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
+    alignContent: "center",
     paddingHorizontal: 10,
     marginBottom: 0,
     marginTop: 0,
+    width: "100%",
+    
   },
   cardContainer1: {
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 10,
-    marginBottom: 0,
+    marginBottom: 80,
     marginTop: 0,
   },
   headerContainer: {
     flexDirection: "row",
-    marginBottom: 0,
-    marginTop: 0,
+    
     paddingHorizontal: 10,
     gap: 20,
-    alignItems:"center"
+    alignItems: "center",
   },
   infoContainer: {
     flexDirection: "column",
     justifyContent: "space-around",
     marginBottom: 0,
-    marginTop: 0,
+    marginTop: 10,
     paddingHorizontal: 20,
   },
   locationText: {
@@ -249,8 +310,9 @@ const styles = StyleSheet.create({
   },
   image1: {
     height: 150,
-    width: 200,
+    width: 320,
     marginBottom: 10,
+    borderRadius: 20,
   },
   image2: {
     height: 100,
@@ -270,7 +332,7 @@ const styles = StyleSheet.create({
     width: 350,
     marginBottom: 50,
   },
-  card: {
+  cardM: {
     backgroundColor: "#fff",
     padding: 10,
     marginVertical: 10,
@@ -281,8 +343,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowOffset: { width: 0, height: 1 },
     shadowRadius: 2,
-    height: 150, // Adjusted height to accommodate text and image
-    width: 150,
+    height: 100, // Adjusted height to accommodate text and image
+    width: 100,
     alignItems: "center",
     justifyContent: "center", // Center the content within the card
   },
@@ -305,8 +367,7 @@ const styles = StyleSheet.create({
     color: "green",
   },
   button: {
-    backgroundColor: "white",
-    paddingVertical: 15,
+    paddingVertical: 5,
     paddingHorizontal: 20,
     borderRadius: 5,
     marginBottom: 10,

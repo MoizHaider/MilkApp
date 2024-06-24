@@ -21,7 +21,7 @@ import * as Location from "expo-location";
 const LATITUDE_DELTA = 0.01;
 const LONGITUDE_DELTA = 0.01;
 
-export default function ProfileScreen({ navigator }) {
+export default function ProfileScreen({ navigation }) {
   const [displayCurrentAddress, setDisplayCurrentAddress] = useState(
     "Location Loading....."
   );
@@ -143,6 +143,16 @@ export default function ProfileScreen({ navigator }) {
     );
   }
 
+  const handlePlaceOrder = () => {
+    // Logic to place the order with the entered address
+    // For demonstration purposes, let's just navigate back to the previous screen
+    
+    
+    // Show alert that the order has been placed
+    Alert.alert('Order Placed', 'Your order has been placed successfully!');
+    navigation.navigate("home");
+  };
+
   return (
     <View className="w-full h-full ">
       <View className = "w-full h-full">
@@ -185,8 +195,8 @@ export default function ProfileScreen({ navigator }) {
           />
         </View>
 
-        <Pressable className="bg-white w-[80%] mt-6 flex py-3 items-center rounded-full">
-          <Text className="text-primaryGreen font-bold text-lg">Next</Text>
+        <Pressable className="bg-white w-[80%] mt-6 flex py-3 items-center rounded-full" onPress={handlePlaceOrder}>
+          <Text className="text-primaryGreen font-bold text-lg">Confirm Order</Text>
         </Pressable>
       </View>
     </View>
